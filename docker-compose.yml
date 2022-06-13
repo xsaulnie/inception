@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
 
@@ -11,12 +11,11 @@ services:
     volumes:
       - database:/var/lib/mysqll
     expose:
-     - '3306'
-    network:
-      - inception_network
-     
+      - '3306'
+    networks:
+       - inception_network 
     restart: always
-  
+
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -25,11 +24,11 @@ services:
     build: php-fpm
     expose:
       - '9000'
-    volume:
+    volumes:
       - website:/var/www/html
-    depends_on:
-       - mysql
-    network:
+    #depends_on:
+    #- mysql
+    networks:
       - inception_network
     restart: always
 
@@ -45,24 +44,23 @@ services:
       - "443:443"
     depends_on:
       - wordpress
-    network:
+    networks:
       - inception_network
     restart: always
 
 volumes:
   website:
-      driver_opts:
-        type: none
-        device: /home/xsaulnie/data/website
-        o: bind
+    driver_opts:
+      type: none
+      device: /home/xsaulnie/data/website
+      o: bind
 
   database:
-      driver_opts:
-        type: none
-        device: /home/xsaulnie/data/database
-        o: bind
+    driver_opts:
+      type: none
+      device: /home/xsaulnie/data/database
+      o: bind
 
 networks:
   inception_network:
     external: false
-    name: inception_network 

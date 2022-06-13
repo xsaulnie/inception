@@ -6,6 +6,6 @@ RUN openssl req -newkey rsa:4096 -nodes -keyout /etc/nginx/ssl/key.pem -x509 -da
 RUN mkdir -p /run/nginx/
 COPY default /etc/nginx/sites-available/default
 EXPOSE 443
-CMD tail -f
-#CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+#CMD tail -f
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
 

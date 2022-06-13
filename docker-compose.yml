@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+
+  mysql:
+    container_name: mariadb
+    image: mariadb
+    env_file:
+      - .env
+    build: mariadb
+    volumes:
+      - database:/var/lib/mysqll
+    expose:
+     - '3306'
+    network:
+      - inception_network
+     
+    restart: always
+  
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    env_file:
+      - .env
+    build: php-fpm
+    expose:
+      - '9000'
+    volume:
+      - website:/var/www/html
+    depends_on:
+       - mysql
+    network:
+      - inception_network
+    restart: always
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    env_file:
+      - .env
+    build: nginx
+    volumes:
+      - website:/var/www/html
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    network:
+      - inception_network
+    restart: always
+
+volumes:
+  website:
+      driver_opts:
+        type: none
+        device: /home/xsaulnie/data/website
+        o: bind
+
+  database:
+      driver_opts:
+        type: none
+        device: /home/xsaulnie/data/database
+        o: bind
+
+networks:
+  inception_network:
+    external: false
+    name: inception_network 

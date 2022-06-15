@@ -4,7 +4,7 @@ services:
 
   mysql:
     container_name: mariadb
-    image: mariadb
+      #image: mariadb
     env_file:
       - .env
     build: mariadb
@@ -18,7 +18,7 @@ services:
 
   wordpress:
     container_name: wordpress
-    image: wordpress
+      #image: wordpress
     env_file:
       - .env
     build: php-fpm
@@ -26,15 +26,15 @@ services:
       - '9000'
     volumes:
       - website:/var/www/html
-    #depends_on:
-    #- mysql
+    depends_on:
+      - mysql
     networks:
       - inception_network
     restart: always
 
   nginx:
     container_name: nginx
-    image: nginx
+      #image: nginx
     env_file:
       - .env
     build: nginx

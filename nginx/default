@@ -1,18 +1,19 @@
 server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
-	access_log off;
-	root /var/www/html;
+	ssl on;
+	#access_log off;
+	root /var/www/html/
 	index index.php;
 	server_name xsaulnie.42.fr;
-	server_tokens off;
+	#server_tokens off;
 
 	ssl_certificate /etc/nginx/ssl/certificate.pem;
 	ssl_certificate_key /etc/nginx/ssl/key.pem;
 	ssl_protocols TLSv1.2 TLSv1.3;
 
 	location /{
-	try_files $uri $uri/ /index.php$args;
+	try_files $uri $uri/ /index.php;
 	}
 
 	location ~ \.php$ {

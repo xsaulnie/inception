@@ -1,6 +1,5 @@
 FROM debian:10
 
-EXPOSE 3306
 RUN apt update
 RUN apt-get install -y openssl php php-fpm php-json mariadb-client php-mysqli php-phar \
 php-curl php-dom php-exif php-fileinfo php-mbstring php-xml php-zip

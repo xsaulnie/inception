@@ -9,7 +9,7 @@ services:
       - .env
     build: mariadb
     volumes:
-      - database:/var/lib/mysqll
+      - database:/var/lib/mysqld
     expose:
       - '3306'
     networks:

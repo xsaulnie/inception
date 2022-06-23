@@ -14,4 +14,11 @@ rm:
 	sudo docker volume rm inception_website
 	sudo rm -Rf /home/xsaulnie/data/website
 	sudo rm -Rf /home/xsaulnie/data/database
-
+rmi:
+	sudo docker volume rm inception_database
+	sudo docker volume rm inception_website
+	sudo rm -Rf /home/xsaulnie/data/website
+	sudo rm -Rf /home/xsaulnie/data/database
+	sudo docker rmi inception_mysql
+	sudo docker rmi inception_wordpress
+	sudo docker rmi inception_nginx

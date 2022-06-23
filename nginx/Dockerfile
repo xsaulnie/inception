@@ -7,6 +7,7 @@ RUN mkdir -p /run/nginx/
 COPY default /etc/nginx/http.d/default.conf
 COPY default /etc/nginx/sites-enabled/default
 EXPOSE 443
+EXPOSE 9000
 #CMD tail -f
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
 

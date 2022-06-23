@@ -2,8 +2,9 @@ server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
 	ssl on;
+	#ssl_prefer_server_ciphers on;
 	#access_log off;
-	root /var/www/html/
+	#root /var/www/html/
 	index index.php;
 	server_name xsaulnie.42.fr;
 	#server_tokens off;
@@ -13,14 +14,15 @@ server {
 	ssl_protocols TLSv1.2 TLSv1.3;
 
 	location /{
-	try_files $uri $uri/ /index.php;
+	#try_files $uri $uri/ /index.php;
+	root /var/www/html/;
 	}
 
 	location ~ \.php$ {
 
-	try_files $uri=404
+	#try_files $uri=404;
 	
-#	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
 
 	fastcgi_pass wordpress.inception_inception_network:9000;
 
@@ -32,7 +34,7 @@ server {
 
 #	fastcgi_param SCRIPT_NAME $fastcgi_script_name;
 
-#	fastcgi_param PATH_INFO $fastcgi_path_info;i
+#	fastcgi_param PATH_INFO $fastcgi_path_info;
 
 	}
 }

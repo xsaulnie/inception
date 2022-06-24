@@ -11,6 +11,8 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 RUN wp cli update
 COPY config_create.sh /etc/config_create.sh
+#RUN mkdir -p /var/www/html
+#COPY wp-config.php /var/www/html/wp-config.php
 #RUN mkdir -p /var/www/html && cd /var/www/html && wp core download  --allow-root
 
 #RUN wp config create --dbhost=$WORDPRESS_DB_HOST --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_ROOT_PASSWORD --allow-root
@@ -20,6 +22,6 @@ COPY config_create.sh /etc/config_create.sh
 
 EXPOSE 9000
 
-ENTRYPOINT ["sh", "/etc/config_create.sh"]
+CMD ["/bin/bash", "/etc/config_create.sh"]
 #CMD ["wp", "bash"]
 #CMD tail -f
